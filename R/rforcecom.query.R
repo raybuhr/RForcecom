@@ -62,7 +62,7 @@ function(session, soqlQuery, queryAll=FALSE){
  try(nextRecordsUrl <- iconv(xmlValue(x.root[['nextRecordsUrl']]), from="UTF-8", to=""), TRUE)
  if(!is.na(nextRecordsUrl)){
   nextRecords <- rforcecom.queryMore(session, nextRecordsUrl)
-  xdf.iconv <- rbind.fill(xdf.iconv, nextRecords)
+  xdf.iconv <- rbindlist(xdf.iconv, nextRecords, fill = TRUE)
  }
  
  return(data.frame(xdf.iconv))
